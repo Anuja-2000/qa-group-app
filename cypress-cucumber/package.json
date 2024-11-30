@@ -16,6 +16,6 @@
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": false,
-    "stepDefinitions": "cypress/e2e/home"
+    "step_definitions": "cypress/e2e/Tests"
   }
 }
