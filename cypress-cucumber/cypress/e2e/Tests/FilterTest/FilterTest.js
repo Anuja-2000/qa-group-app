@@ -1,7 +1,7 @@
 import {Given, When, Then, And} from "cypress-cucumber-preprocessor/steps"
-import pricing from "../../Pages/PricePage/PricePage";
+import Inventory from "../../Pages/inventoryPage/InventoryPage.cy";
 import login from "../../Pages/LoginPage/LoginPage.cy";
-const pricing = new Pricing();
+const inventory = new Inventory();
 
 Given('I am logged into the application', () => {
     login.enterURL();
@@ -9,12 +9,18 @@ Given('I am logged into the application', () => {
     login.clickSubmitButton();
 });
 
-Given('I am on the products page', () => {
-    pricing.visitPricingPage();
+Given('the user is on the items page', () => {
+    inventory.visitProductsPage();
 });
 
-When('I add the {string} to the cart', (option) => {
-    pricing.selectParallelTest(option);
+When('the user selects {string} from the dropdown', (sortOption) => {
+    inventory.selectFilterOption(sortOption);
 });
 
+Then('the items should be sorted alphabetically by name in ascending order', () => {
+    inventory.sortByName();
+});
 
+Then('the items should be sorted by price in ascending order', () => {
+    inventory.sortByPrice();
+});
