@@ -1,6 +1,7 @@
 const baseUrl = Cypress.config('baseUrlAPI');
 
 class Books {
+
     visitBooksPage() {
         cy.url().should('eq',baseUrl+'books');
     }
@@ -14,11 +15,11 @@ class Books {
       }
     
     getBooks() {
-        return cy.request('GET', baseUrl + 'books');
+        return cy.request('GET', baseUrl + '/api/books');
     }
     
-    deleteBook(bookName) {
-        cy.request('DELETE', baseUrl + 'books/' + bookName);
+    deleteBook(bookId) {
+        cy.request('DELETE', baseUrl + '/api/books/' + bookId);
     }
     }
 

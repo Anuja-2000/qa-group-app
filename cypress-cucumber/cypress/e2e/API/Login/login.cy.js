@@ -9,7 +9,7 @@ class Login {
      */
     loginUser(username, password) {
       return cy.request({
-        method: 'GET',
+        method: 'OPTIONS',
         url: baseUrl, // Replace with your actual login API endpoint
         auth: {
             username: username,
