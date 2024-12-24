@@ -6,6 +6,8 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       on("file:preprocessor", cucumber());
     },
-    baseUrl: "http://localhost:3000"
+    baseUrl: "https://www.saucedemo.com/",
+    baseUrlAPI: "http://localhost:7081",
   },
+  chromeWebSecurity: false,
 });
