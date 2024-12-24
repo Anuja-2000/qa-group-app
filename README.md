@@ -1,4 +1,4 @@
-## IS3440 IT Quality Assuarance group project 
+## IS3440 IT Quality Assuarance group project
 
 This project consits of Cypress + cucumber BDD
 
