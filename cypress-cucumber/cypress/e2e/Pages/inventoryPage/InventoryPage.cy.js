@@ -38,6 +38,10 @@ class Inventory {
       cy.get('.shopping_cart_badge').should('have.text', String(expectedCount));
     }
 
+    verifyCartEmpty() {
+      cy.get('.cart_item').should('not.exist');
+    }
+
     selectFilterOption(sortOption){
         cy.get('.product_sort_container') // Replace '#sortDropdown' with the actual dropdown selector
             .select(sortOption); // Select the option by visible text
