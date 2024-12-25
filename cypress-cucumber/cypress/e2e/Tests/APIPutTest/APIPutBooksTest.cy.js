@@ -1,14 +1,14 @@
 const baseUrl = Cypress.config('baseUrlAPI');
 let authHeader = {};
 
-Given('I am authenticated as {string} with password {string}', (username, password) => {
+Given('the user is authenticated as {string} with password {string}', (username, password) => {
     authHeader = {
         Authorization: `Basic ${btoa(username + ':' + password)}`,
         'Content-Type': 'application/json',
     };
 });
 
-Given('I am not authenticated', () => {
+Given('the user is not authenticated', () => {
     authHeader = {};  // Clear the authHeader when not authenticated
 });
 
@@ -18,10 +18,10 @@ Given('a book exists with ID {int}', (id) => {
         url: `${baseUrl}/api/books`,
         headers: authHeader,
         body: {id, title: "Sample Book", author: "Sample Author"},
-    }).its('status').should('eq', 208);
+    }).its('status').should('be.oneOf', [201, 208]);
 });
 
-When('I send a PUT request to {string} with:', (path, dataTable) => {
+When('the user sends a PUT request to {string} with:', (path, dataTable) => {
     const data = dataTable.hashes()[0];
     cy.request({
         method: 'PUT',
