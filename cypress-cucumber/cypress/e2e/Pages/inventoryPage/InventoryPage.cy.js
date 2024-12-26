@@ -1,4 +1,4 @@
-const baseUrl = Cypress.config('baseUrl');
+const baseUrl = Cypress.config("baseUrl");
 
 class Inventory {
     visitProductsPage() {
@@ -42,28 +42,30 @@ class Inventory {
       cy.get('.shopping_cart_badge').should('have.text', String(expectedCount));
     }
 
-    selectFilterOption(sortOption){
-        cy.get('.product_sort_container') // Replace '#sortDropdown' with the actual dropdown selector
-            .select(sortOption); // Select the option by visible text
-    }
-
-    sortByName(){
-        cy.get('.inventory_item_name ') // Replace '.item-name' with the selector for item names
-            .then(($items) => {
-                const names = $items.map((_, el) => Cypress.$(el).text()).get();
-                const sortedNames = [...names].sort();
-                expect(names).to.deep.equal(sortedNames);
-            });
-    }
-
-    sortByPrice(){
-        cy.get('.inventory_item_price') // Replace '.item-price' with the selector for item prices
-            .then(($prices) => {
-                const prices = $prices.map((_, el) => parseFloat(Cypress.$(el).text())).get();
-                const sortedPrices = [...prices].sort((a, b) => a - b);
-                expect(prices).to.deep.equal(sortedPrices);
-            });
-    }
+  selectFilterOption(sortOption) {
+    cy.get(".product_sort_container") // Replace '#sortDropdown' with the actual dropdown selector
+      .select(sortOption); // Select the option by visible text
   }
-  
-  export default Inventory;  
+
+  sortByName() {
+    cy.get(".inventory_item_name ") // Replace '.item-name' with the selector for item names
+      .then(($items) => {
+        const names = $items.map((_, el) => Cypress.$(el).text()).get();
+        const sortedNames = [...names].sort();
+        expect(names).to.deep.equal(sortedNames);
+      });
+  }
+
+  sortByPrice() {
+    cy.get(".inventory_item_price") // Replace '.item-price' with the selector for item prices
+      .then(($prices) => {
+        const prices = $prices
+          .map((_, el) => parseFloat(Cypress.$(el).text()))
+          .get();
+        const sortedPrices = [...prices].sort((a, b) => a - b);
+        expect(prices).to.deep.equal(sortedPrices);
+      });
+  }
+}
+
+export default Inventory;
