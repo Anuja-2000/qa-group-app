@@ -1,9 +1,18 @@
 const baseUrl = Cypress.config("baseUrl");
 
 class Inventory {
-    visitProductsPage() {
-      cy.url().should('eq',baseUrl+'inventory.html');
-    }
+  visitProductsPage() {
+    // Visit the login page first
+    cy.visit('https://www.saucedemo.com/');
+
+    // Enter login credentials (replace with actual credentials)
+    cy.get('input#user-name').type('standard_user');  // Username field
+    cy.get('input#password').type('secret_sauce');   // Password field
+    cy.get('input#login-button').click();             // Login button
+
+    // After login, visit the inventory page directly
+    cy.url().should('eq', 'https://www.saucedemo.com/inventory.html');
+  }
 
     visitProductPageFailAttempt() {
             cy.visit(baseUrl+'inventory.html', { failOnStatusCode: false });
