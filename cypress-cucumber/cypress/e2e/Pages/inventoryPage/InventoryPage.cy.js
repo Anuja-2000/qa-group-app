@@ -1,7 +1,7 @@
 const baseUrl = Cypress.config("baseUrl");
 
 class Inventory {
-  visitCheckoutYourInformationPage() {
+  visitProductsPage() {
     cy.url().should("eq", baseUrl + "inventory.html");
   }
 
@@ -23,7 +23,9 @@ class Inventory {
 
   verifyItemsInCart(itemNames) {
     const items = Array.isArray(itemNames) ? itemNames : [itemNames];
+
     cy.get(".cart_item").should("have.length", items.length);
+
     items.forEach((itemName) => {
       cy.get(".cart_item").should("contain", itemName);
     });
@@ -34,25 +36,28 @@ class Inventory {
   }
 
   selectFilterOption(sortOption) {
-    cy.get(".product_sort_container").select(sortOption);
+    cy.get(".product_sort_container") // Replace '#sortDropdown' with the actual dropdown selector
+      .select(sortOption); // Select the option by visible text
   }
 
   sortByName() {
-    cy.get(".inventory_item_name").then(($items) => {
-      const names = $items.map((_, el) => Cypress.$(el).text()).get();
-      const sortedNames = [...names].sort();
-      expect(names).to.deep.equal(sortedNames);
-    });
+    cy.get(".inventory_item_name ") // Replace '.item-name' with the selector for item names
+      .then(($items) => {
+        const names = $items.map((_, el) => Cypress.$(el).text()).get();
+        const sortedNames = [...names].sort();
+        expect(names).to.deep.equal(sortedNames);
+      });
   }
 
   sortByPrice() {
-    cy.get(".inventory_item_price").then(($prices) => {
-      const prices = $prices
-        .map((_, el) => parseFloat(Cypress.$(el).text()))
-        .get();
-      const sortedPrices = [...prices].sort((a, b) => a - b);
-      expect(prices).to.deep.equal(sortedPrices);
-    });
+    cy.get(".inventory_item_price") // Replace '.item-price' with the selector for item prices
+      .then(($prices) => {
+        const prices = $prices
+          .map((_, el) => parseFloat(Cypress.$(el).text()))
+          .get();
+        const sortedPrices = [...prices].sort((a, b) => a - b);
+        expect(prices).to.deep.equal(sortedPrices);
+      });
   }
 }
 
