@@ -4,6 +4,10 @@ class Inventory {
     visitProductsPage() {
       cy.url().should('eq',baseUrl+'inventory.html');
     }
+
+    visitProductPageFailAttempt() {
+            cy.visit(baseUrl+'inventory.html', { failOnStatusCode: false });
+    }
   
     addItemToCart(itemName) {
       cy.contains('.inventory_item', itemName)
