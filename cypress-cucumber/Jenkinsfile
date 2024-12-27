@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'ubuntu'
-    }
+    agent any
 
     environment {
         CYPRESS_CACHE_FOLDER = "${WORKSPACE}/.cache/Cypress" // Custom cache location
