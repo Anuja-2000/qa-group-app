@@ -12,6 +12,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Install project dependencies
+                sh 'cd cypress-cucumber'
                 sh 'npm install'
             }
         }
