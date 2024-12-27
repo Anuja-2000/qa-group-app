@@ -1,8 +1,19 @@
 pipeline {
     agent any
+
     tools {
         nodejs('NodeJs')
     }
+
+    parameters {
+        string(name: 'SPEC', defaultValue: "cypress/e2e/Tests/**/*.feature", description: 'Cypress test spec file or folder')
+        choice(name: 'BROWSER', choices: ['chrome', 'edge'], description: 'Browser to run tests in')
+    }
+
+    options {
+        ansiColor('xterm')
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
@@ -18,10 +29,10 @@ pipeline {
             }
         }
 
-        stage('Run Cypress Tests') {
+        stage('Testing') {
             steps {
                 // Run Cypress tests
-                sh 'cd cypress-cucumber/ && npm run test'
+                sh 'cd cypress-cucumber/ && npx cypress run --spec "${SPEC}" --browser "${BROWSER}" --headless'
             }
         }
     }
