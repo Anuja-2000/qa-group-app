@@ -36,3 +36,10 @@ Feature: Update a Book
       | id    | title             | author          |
       | 1     | Updated Book      | Updated Author  |
     Then the response status code should be 401
+
+  Scenario: Attempt to update a book with invalid data types
+    When the user sends a PUT request to "/api/books/1" with:
+      | id    | title             | author          |
+      | 1     | Updated Book      | true            |
+    Then the response status code should be 400
+    And the response body should contain "Invalid data type"
