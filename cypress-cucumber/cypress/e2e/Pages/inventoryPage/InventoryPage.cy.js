@@ -33,7 +33,11 @@ class Inventory {
     viewCart() {
       cy.get('.shopping_cart_link').click();
     }
-  
+
+    verifyCartEmpty() {
+        cy.get('.cart_item').should('not.exist');
+    }
+
     verifyItemsInCart(itemNames) {
 
         const items = Array.isArray(itemNames) ? itemNames : [itemNames];
