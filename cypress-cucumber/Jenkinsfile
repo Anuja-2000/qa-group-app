@@ -21,6 +21,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Install project dependencies
+                sh 'dnf install -y xorg-x11-server-Xvfb gtk3-devel nss alsa-lib'
                 sh 'cd cypress-cucumber/ && npm install'                
             }
         }
