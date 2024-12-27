@@ -10,10 +10,6 @@ pipeline {
         choice(name: 'BROWSER', choices: ['chrome', 'edge'], description: 'Browser to run tests in')
     }
 
-    options {
-        ansiColor('xterm')
-    }
-
     stages {
         stage('Checkout Code') {
             steps {
