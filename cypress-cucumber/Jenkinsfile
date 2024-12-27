@@ -1,52 +1,38 @@
 pipeline {
     agent any
 
-    environment {
-        CYPRESS_CACHE_FOLDER = "${WORKSPACE}/.cache/Cypress" // Custom cache location
-    }
-
     stages {
-        stage('Setup Environment') {
-            steps {
-                // Install required system dependencies for Cypress on Ubuntu
-                sh '''
-                sudo apt-get update
-                sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 \
-                    libnss3 libxss1 libasound2 xvfb
-                '''
-            }
-        }
-
         stage('Checkout Code') {
             steps {
-                // Checkout the project code
+                // Checkout code from version control
                 checkout scm
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                // Install Node.js dependencies
+                // Install project dependencies
+                sh 'cd cypress-cucumber'
                 sh 'npm install'
             }
         }
 
         stage('Run Cypress Tests') {
             steps {
-                // Run Cypress tests with headless browser
-                sh 'npx cypress run'
+                // Run Cypress tests
+                sh 'npm run cypress:run'
             }
         }
     }
 
     post {
         always {
-            // Archive artifacts like screenshots, videos, and reports
+            // Archive test results and screenshots
             archiveArtifacts artifacts: 'cypress/screenshots/**/*, cypress/videos/**/*', allowEmptyArchive: true
-            junit 'cypress/results/*.xml' // Adjust path if using JUnit reporter
+            junit 'cypress/results/*.xml' // If you generate test result reports
         }
         failure {
-            // Failure notification
+            // Notify on failure
             echo 'Cypress tests failed!'
         }
     }
