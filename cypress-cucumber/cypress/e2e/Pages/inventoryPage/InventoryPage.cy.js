@@ -40,7 +40,6 @@ class Inventory {
         });
       }
       
-      
   
     verifyCartItemCount(expectedCount) {
       cy.get('.shopping_cart_badge').should('have.text', String(expectedCount));
@@ -70,6 +69,12 @@ class Inventory {
         expect(prices).to.deep.equal(sortedPrices);
       });
   }
+
+      // New method to click the checkout button
+      clickCheckoutButton() {
+        cy.get('button[data-test="checkout"]').click();
+    }
+
 }
 
 export default Inventory;
