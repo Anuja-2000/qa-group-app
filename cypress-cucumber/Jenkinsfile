@@ -1,8 +1,7 @@
 pipeline {
-    agent any
 
-    docker {
-      image 'cypress/base:22.11.0'
+    agent {
+        docker { image 'cypress/base:22.11.0' }
     }
 
     tools {
