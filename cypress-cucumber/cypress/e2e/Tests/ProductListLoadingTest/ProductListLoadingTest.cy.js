@@ -2,6 +2,7 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 import Inventory from "../../Pages/InventoryPage/InventoryPage.cy"; // Adjust path as needed
 
+
 const inventory = new Inventory();
 
 Given("User navigate to the Website", () => {

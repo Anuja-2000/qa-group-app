@@ -8,14 +8,12 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
-    "cypress-cucumber-preprocessor": "^4.3.1"
-  },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": false,
     "step_definitions": "cypress/e2e/Tests"
   },
   "devDependencies": {
-    "cypress": "^13.17.0"
+    "cypress": "^13.17.0",
+    "cypress-cucumber-preprocessor": "^4.3.1"
   }
 }
