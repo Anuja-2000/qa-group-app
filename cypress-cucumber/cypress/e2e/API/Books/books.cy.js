@@ -13,6 +13,14 @@ class Books {
     });
   }
 
+    getBook(bookId) {
+        return cy.request({
+            method:'GET',
+            url: baseUrl + '/api/books/' + bookId,
+            failOnStatusCode: false
+            });
+    }
+
   getBooks() {
     return cy.request("GET", baseUrl + "/api/books");
   }

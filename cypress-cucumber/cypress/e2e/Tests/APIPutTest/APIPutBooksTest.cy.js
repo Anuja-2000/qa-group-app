@@ -15,30 +15,30 @@ Given("the user is not authenticated", () => {
   authHeader = {}; // Clear the authHeader when not authenticated
 });
 
-Given("a book exists with ID {int}", (id) => {
-  cy.request({
-    method: "POST",
-    url: `${baseUrl}/api/books`,
-    headers: authHeader,
-    body: { id, title: "Sample Book", author: "Sample Author" },
-  })
-    .its("status")
-    .should("be.oneOf", [201, 208]);
+Given('a book exists with ID {int}', (id) => {
+    cy.request({
+        method: 'POST',
+        url: `${baseUrl}/api/books`,
+        headers: authHeader,
+        body: {id, title: "Sample Book", author: "Sample Author"},
+    })
+    .its('status')
+    .should('be.oneOf', [201, 208]);
 });
 
-When("the user sends a PUT request to {string} with:", (path, dataTable) => {
-  const data = dataTable.hashes()[0];
-  cy.request({
-    method: "PUT",
-    url: `${baseUrl}${path}`,
-    headers: authHeader,
-    failOnStatusCode: false,
-    body: {
-      id: data.id === "null" ? null : parseInt(data.id),
-      title: data.title,
-      author: data.author,
-    },
-  }).as("response");
+When('the user sends a PUT request to {string} with:', (path, dataTable) => {
+    const data = dataTable.hashes()[0];
+    cy.request({
+        method: 'PUT',
+        url: `${baseUrl}${path}`,
+        headers: authHeader,
+        failOnStatusCode: false,
+        body: {
+            id: data.id === "null" ? null : parseInt(data.id),
+            title: data.title,
+            author: data.author,
+        },
+    }).as('response');
 });
 
 Then("the response status code should be {int}", (statusCode) => {
@@ -59,3 +59,13 @@ Then("the response should include:", (dataTable) => {
 Then("the response body should contain {string}", (message) => {
   cy.get("@response").its("body").should("include", message);
 });
+
+Then(
+  "the response status code should be {int} due to missing parameters",
+  (statusCode) => {
+    cy.get("@response").its("status").should("eq", statusCode);
+    cy.get("@response")
+      .its("body")
+      .should("include", "Missing mandatory parameters");
+  }
+);
