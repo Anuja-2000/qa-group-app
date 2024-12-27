@@ -1,48 +1,26 @@
 pipeline {
     agent any
 
+    docker {
+      image 'cypress/base:22.11.0'
+    }
+
     tools {
         nodejs('NodeJs')
     }
 
-    parameters {
-        string(name: 'SPEC', defaultValue: "cypress/e2e/Tests/**/*.feature", description: 'Cypress test spec file or folder')
-        choice(name: 'BROWSER', choices: ['chrome', 'edge'], description: 'Browser to run tests in')
-    }
-
     stages {
-        stage('Checkout Code') {
-            steps {
-                // Checkout code from version control
-                checkout scm
-            }
-        }
 
         stage('Install Dependencies') {
+            environment {
+            CYPRESS_RECORD_KEY = credentials('cypress-example-kitchensink-record-key')
+            }
             steps {
                 // Install project dependencies
-                sh 'sudo apt-get install Xvfb' // Install Xvfb
-                sh 'cd cypress-cucumber/ && npm install'                
+                sh 'cd cypress-cucumber/ && npm ci'
+                sh 'cd cypress-cucumber/ && npm install'  
+                sh "cd cypress-cucumber/ && npm run test:ci:record"              
             }
-        }
-
-        stage('Testing') {
-            steps {
-                // Run Cypress tests
-                sh 'cd cypress-cucumber/ && npx cypress run --spec "${SPEC}" --browser "${BROWSER}" --headless'
-            }
-        }
-    }
-
-    post {
-        always {
-            // Archive test results and screenshots
-            archiveArtifacts artifacts: 'cypress/screenshots/**/*, cypress/videos/**/*', allowEmptyArchive: true
-            junit 'cypress/results/*.xml' // If you generate test result reports
-        }
-        failure {
-            // Notify on failure
-            echo 'Cypress tests failed!'
         }
     }
 }
