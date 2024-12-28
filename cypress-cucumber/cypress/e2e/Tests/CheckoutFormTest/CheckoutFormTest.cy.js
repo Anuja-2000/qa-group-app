@@ -76,11 +76,6 @@ When("the user enters an invalid postal code and submits", () => {
   checkoutPage.submitForm();
 });
 
-// Cancel checkout
-When("the user clicks the cancel button", () => {
-  checkoutPage.clickCancelButton();
-});
-
 // Validations for form errors and navigation
 Then("the user should see an error message for empty fields", () => {
   checkoutPage.verifyFormValidationError("Error: First Name is required");
