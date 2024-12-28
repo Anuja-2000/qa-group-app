@@ -8,15 +8,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
+        
       - name: Install dependencies
         run: npm install
         working-directory: cypress-cucumber
+
+      - name: Change to sub directory
+        run: cd cypress-cucumber
       
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          install: npm install --prefix cypress-cucmber
-          build: cd cypress-cucumber && npm run build
-          start: cd cypress-cucumber && npm start
+          build: npm run build
+          start: npm start        
+        
