@@ -60,6 +60,21 @@ class OverviewPage {
     cancelCheckout() {
         cy.get('button[data-test="cancel"]').click();
     }
+
+    clickCancel() {
+        cy.log('Clicking "Cancel" button to navigate back to the product page...');
+        cy.get('button[data-test="cancel"]').click(); // Selector for Cancel button
+    }
+
+    verifyProductPageRedirection() {
+        cy.log('Verifying product page redirection...');
+        cy.url().should('include', '/inventory.html');
+    }
+
+    verifyProductsVisible() {
+        cy.log('Verifying product list is visible...');
+        cy.get('.inventory_list').should('be.visible');
+    }
 }
 
 export default OverviewPage;
