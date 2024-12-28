@@ -12,11 +12,11 @@ jobs:
       # and run all Cypress tests
       - name: Install dependencies
         run: npm install
-        working-directory: cypress-cucmber
+        working-directory: cypress-cucumber
       
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           install: npm install --prefix cypress-cucmber
-          build: cd cypress-cucmber && npm run build
-          start: cd cypress-cucmber && npm start
+          build: cd cypress-cucumber && npm run build
+          start: cd cypress-cucumber && npm start
