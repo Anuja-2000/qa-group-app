@@ -39,7 +39,7 @@ When('the user clicks on "Back to Products"', () => {
 });
 
 Then('the user should be redirected to the product page', () => {
-    cy.url().should('include', '/inventory.html'); // This URL might change depending on your application
+    cy.url().should('include', '/cart.html'); 
 });
 
 Then('the user should see a list of available products', () => {
