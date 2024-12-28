@@ -11,14 +11,9 @@ jobs:
         
       - name: Install dependencies
         run: npm install
-        working-directory: cypress-cucumber
-
-      - name: Change to sub directory
-        run: cd cypress-cucumber
       
       - name: Cypress run
         uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm start        
+        with:          
+          start: npm run test 
         
