@@ -68,7 +68,7 @@ When("the user enters an invalid postal code and submits", () => {
 Then(
   "the user should not see any error message for invalid postal code",
   () => {
-    checkoutPage.verifyNoPostalCodeError();
+    checkoutPage.verifyInvalidPostalCodeError();
   }
 );
 
