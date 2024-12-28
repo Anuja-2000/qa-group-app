@@ -13,6 +13,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          install: cd cypress-cucmber && npm install
+          install: npm install --prefix cypress-cucmber
           build: cd cypress-cucmber && npm run build
           start: cd cypress-cucmber && npm start
