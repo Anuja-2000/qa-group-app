@@ -10,9 +10,11 @@ class Inventory {
     }
   
     addItemToCart(itemName) {
+
       cy.contains('.inventory_item', itemName)
         .find('button[data-test^="add-to-cart"]')
         .click();
+        
     }
   
     removeItemFromCart(itemName) {
