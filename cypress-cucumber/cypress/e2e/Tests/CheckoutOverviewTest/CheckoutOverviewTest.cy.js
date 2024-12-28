@@ -36,42 +36,33 @@ When('the user proceeds to checkout overview', () => {
     cy.get('input[value="Continue"]').click();    
 });
 
-Then('the user should see the "Item total: ${float}" information', (expectedTotal) => {
-    overviewPage.verifyItemTotal(expectedTotal);
-});
+Then('the user should see the following information and shipping and payment method', (dataTable) => {
+    const [totals] = dataTable.hashes();
 
-Then('the user should see the "Item total: $0" information', () => {
-    overviewPage.verifyItemTotal(0);
-});
-
-Then('the user should see the "Tax: ${float}" information', (expectedTax) => {
-    overviewPage.verifyTax(expectedTax);
-});
-
-Then('the user should see the "Total: ${float}" information', (expectedTotal) => {
-    overviewPage.verifyTotal(expectedTotal);
-});
-
-Then('the user should see the "Payment Information: SauceCard #31337" information', () => {
+    overviewPage.verifyItemTotal(totals['Item total']);
+    overviewPage.verifyTax(totals['Tax']);
+    overviewPage.verifyTotal(totals['Total']);
+    overviewPage.verifyShippingInformation();
     overviewPage.verifyPaymentInformation();
 });
 
-Then('the user should see the "Shipping Information: Free Pony Express Delivery!" information', () => {
-    overviewPage.verifyShippingInformation();
-});
-
-Then('the user should see the item title {string} for item {int}', (itemTitle, itemIndex) => {
+Then('the user should see the item {string} with description, price {string}, and quantity "{int}" for item {int}', (itemTitle, itemPrice, itemQty, itemIndex) => {
     overviewPage.verifyItemTitle(itemTitle, itemIndex);
-});
-
-Then('the user should see the item description for Item {int}', (itemIndex) => {
     overviewPage.verifyItemDescriptionIsNotEmpty(itemIndex);
-});
-
-Then('the user should see the item price {string} for Item {int}', (itemPrice, itemIndex) => {
     overviewPage.verifyItemPrice(itemPrice, itemIndex);
+    overviewPage.verifyItemQuantity(itemQty, itemIndex);
 });
 
-Then('the user should see the item quantity "{int}" for Item {int}', (itemQty, itemIndex) => {
-    overviewPage.verifyItemQuantity(itemQty, itemIndex);
+Then('the user should see the following items:', (dataTable) => {
+    const items = dataTable.hashes();
+
+    items.forEach((item) => {
+        const itemIndex = parseInt(item.itemIndex);
+        const cartItem = {
+            itemTitle: item.itemTitle,
+            itemPrice: item.itemPrice,
+            itemQty: parseInt(item.itemQty),
+        };
+        overviewPage.verifyItem(cartItem, itemIndex);
+    });
 });
