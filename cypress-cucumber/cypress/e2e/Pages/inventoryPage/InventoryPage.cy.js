@@ -4,6 +4,10 @@ class Inventory {
     visitProductsPage() {
       cy.url().should('eq',baseUrl+'inventory.html');
     }
+
+    visitProductPageFailAttempt() {
+            cy.visit(baseUrl+'inventory.html', { failOnStatusCode: false });
+    }
   
     addItemToCart(itemName) {
       cy.contains('.inventory_item', itemName)
@@ -20,7 +24,11 @@ class Inventory {
     viewCart() {
       cy.get('.shopping_cart_link').click();
     }
-  
+
+    verifyCartEmpty() {
+        cy.get('.cart_item').should('not.exist');
+    }
+
     verifyItemsInCart(itemNames) {
 
         const items = Array.isArray(itemNames) ? itemNames : [itemNames];
