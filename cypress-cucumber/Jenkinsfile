@@ -1,0 +1,25 @@
+pipeline {
+
+    agent {
+        docker { image 'cypress/base:22.11.0' }
+    }
+
+    tools {
+        nodejs('NodeJs')
+    }
+
+    stages {
+
+        stage('Install Dependencies') {
+            environment {
+            CYPRESS_RECORD_KEY = credentials('cypress-example-kitchensink-record-key')
+            }
+            steps {
+                // Install project dependencies
+                sh 'cd cypress-cucumber/ && npm ci'
+                sh 'cd cypress-cucumber/ && npm install'  
+                sh "cd cypress-cucumber/ && npm run test:ci:record"              
+            }
+        }
+    }
+}
