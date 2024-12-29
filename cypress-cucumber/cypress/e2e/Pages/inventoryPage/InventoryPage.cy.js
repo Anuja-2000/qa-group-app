@@ -1,50 +1,47 @@
 const baseUrl = Cypress.config("baseUrl");
 
 class Inventory {
-    visitProductsPage() {
-      cy.url().should('eq',baseUrl+'inventory.html');
-    }
+  visitProductsPage() {
+    cy.url().should("eq", baseUrl + "inventory.html");
+  }
 
-    visitProductPageFailAttempt() {
-            cy.visit(baseUrl+'inventory.html', { failOnStatusCode: false });
-    }
-  
-    addItemToCart(itemName) {
-      cy.contains('.inventory_item', itemName)
-        .find('button[data-test^="add-to-cart"]')
-        .click();
-    }
-  
-    removeItemFromCart(itemName) {
-      cy.contains('.cart_item', itemName)
-        .find('button[data-test^="remove"]')
-        .click();
-    }
-  
-    viewCart() {
-      cy.get('.shopping_cart_link').click();
-    }
+  visitProductPageFailAttempt() {
+    cy.visit(baseUrl + "inventory.html", { failOnStatusCode: false });
+  }
 
-    verifyCartEmpty() {
-        cy.get('.cart_item').should('not.exist');
-    }
+  addItemToCart(itemName) {
+    cy.contains(".inventory_item", itemName)
+      .find('button[data-test^="add-to-cart"]')
+      .click();
+  }
 
-    verifyItemsInCart(itemNames) {
+  removeItemFromCart(itemName) {
+    cy.contains(".cart_item", itemName)
+      .find('button[data-test^="remove"]')
+      .click();
+  }
 
-        const items = Array.isArray(itemNames) ? itemNames : [itemNames];
-      
-        cy.get('.cart_item').should('have.length', items.length);
-      
-        items.forEach((itemName) => {
-          cy.get('.cart_item').should('contain', itemName);
-        });
-      }
-      
-      
-  
-    verifyCartItemCount(expectedCount) {
-      cy.get('.shopping_cart_badge').should('have.text', String(expectedCount));
-    }
+  viewCart() {
+    cy.get(".shopping_cart_link").click();
+  }
+
+  verifyCartEmpty() {
+    cy.get(".cart_item").should("not.exist");
+  }
+
+  verifyItemsInCart(itemNames) {
+    const items = Array.isArray(itemNames) ? itemNames : [itemNames];
+
+    cy.get(".cart_item").should("have.length", items.length);
+
+    items.forEach((itemName) => {
+      cy.get(".cart_item").should("contain", itemName);
+    });
+  }
+
+  verifyCartItemCount(expectedCount) {
+    cy.get(".shopping_cart_badge").should("have.text", String(expectedCount));
+  }
 
   selectFilterOption(sortOption) {
     cy.get(".product_sort_container") // Replace '#sortDropdown' with the actual dropdown selector
@@ -69,6 +66,12 @@ class Inventory {
         const sortedPrices = [...prices].sort((a, b) => a - b);
         expect(prices).to.deep.equal(sortedPrices);
       });
+  }
+
+  removeItemBeforeCart(itemName) {
+    cy.contains(".inventory_item", itemName)
+      .find('button[data-test^="remove"]')
+      .click();
   }
 }
 

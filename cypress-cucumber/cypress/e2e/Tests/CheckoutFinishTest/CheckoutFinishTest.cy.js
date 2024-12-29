@@ -11,7 +11,7 @@ const completePage = new CompletePage();
 // User login and navigation to the product page
 Given("the user is logged into the application", () => {
   Login.enterURL();
-  Login.enterUserNamePassword("problem_user", "secret_sauce");
+  Login.enterUserNamePassword("standard_user", "secret_sauce");
   Login.clickSubmitButton();
 });
 
@@ -19,7 +19,6 @@ Given("the user is on the products page", () => {
   inventory.visitProductsPage();
 });
 
-// Adding items to the cart
 When("the user adds the {string} to the cart", (itemName) => {
   inventory.addItemToCart(itemName);
 });
@@ -36,7 +35,6 @@ Then("the cart item count should be {int}", (expectedCount) => {
   inventory.verifyCartItemCount(expectedCount);
 });
 
-// Adding multiple items to the cart
 Given(
   "the user has added the {string} and {string} to the cart",
   (item1, item2) => {
@@ -47,18 +45,6 @@ Given(
     inventory.verifyCartItemCount(2);
   }
 );
-
-// // Navigating to the checkout page
-// When("the user clicks the checkout button", () => {
-//   inventory.clickCheckoutButton();
-// });
-
-// Then(
-//   "the user should be navigated to the Checkout: Your Information page",
-//   () => {
-//     checkoutPage.verifyTitle();
-//   }
-// );
 
 When("the user proceeds to checkout overview", () => {
   cy.contains("button", "Checkout").click();
@@ -75,11 +61,6 @@ When("the user proceeds to checkout overview", () => {
     .and("not.be.disabled")
     .click();
 });
-// Handling invalid form submissions
-
-// When("the user clicks the continue button", () => {
-//   overview.continueCheckout();
-// });
 
 When("the user clicks the finish button", () => {
   overview.finishCheckout();
