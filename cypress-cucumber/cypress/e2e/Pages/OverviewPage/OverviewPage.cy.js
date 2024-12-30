@@ -2,17 +2,17 @@ class OverviewPage {
 
     verifyItemTotal(expectedTotal) {
         cy.get('.summary_subtotal_label')
-            .should('contain.text', `Item total: $${expectedTotal}`);
+            .should('contain.text', `Item total: ${expectedTotal}`);
     }
 
     verifyTax(expectedTax) {
         cy.get('.summary_tax_label')
-            .should('contain.text', `Tax: $${expectedTax}`);
+            .should('contain.text', `Tax: ${expectedTax}`);
     }
 
     verifyTotal(expectedTotal) {
         cy.get('.summary_total_label')
-            .should('contain.text', `Total: $${expectedTotal}`);
+            .should('contain.text', `Total: ${expectedTotal}`);
     }
 
     verifyPaymentInformation(expectedPaymentInfo = 'SauceCard #31337') {
@@ -51,6 +51,13 @@ class OverviewPage {
             .eq(itemIndex - 1)
             .find('.cart_quantity')
             .should('have.text', String(itemQty));
+    }
+
+    verifyItem({ itemTitle, itemPrice, itemQty }, itemIndex) {
+        this.verifyItemTitle(itemTitle, itemIndex);
+        this.verifyItemDescriptionIsNotEmpty(itemIndex);
+        this.verifyItemPrice(itemPrice, itemIndex);
+        this.verifyItemQuantity(itemQty, itemIndex);
     }
 
     finishCheckout() {
