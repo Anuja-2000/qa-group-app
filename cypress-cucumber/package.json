@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open"
+    "test": "cypress open",
+    "test:ci:record": "run-p --race start e2e:record"
   },
   "author": "",
   "license": "ISC",
