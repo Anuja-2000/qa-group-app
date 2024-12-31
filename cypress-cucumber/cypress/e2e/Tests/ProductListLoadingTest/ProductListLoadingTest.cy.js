@@ -29,3 +29,13 @@ Then("Each product should have a valid name and price", () => {
   });
 });
 
+And("Each product image should load correctly", () => {
+  cy.get(".inventory_item").each(($el) => {
+    // Validate that each product image loads correctly
+    cy.wrap($el).find(".inventory_item_img").should("be.visible");
+    cy.wrap($el).find(".inventory_item_name").invoke('text').then((productName) => {
+      cy.wrap($el).find(".inventory_item_img").should('have.attr', 'alt', productName);
+    });
+  });
+  });
+

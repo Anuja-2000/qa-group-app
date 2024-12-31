@@ -1,3 +1,4 @@
+import books from "../../API/Books/books.cy";
 const baseUrl = Cypress.config('baseUrlAPI');
 let authHeader = {};
 
@@ -53,11 +54,13 @@ Given('a book exists with ID 1', () => {
 });
 
 When('the admin sends a DELETE request to "/api/books/1"', () => {
-    cy.request({
+    books.addBook({ id: 1, title: "Sample Book", author: "Sample Author" });
+    books.deleteBook(1);
+    /*cy.request({
         method: 'DELETE',
         url: `${baseUrl}/api/books/1`,
         headers: authHeader,
-    }).as('response');
+    }).as('response');*/
 });
 
 Then('the response status code should be 200', () => {

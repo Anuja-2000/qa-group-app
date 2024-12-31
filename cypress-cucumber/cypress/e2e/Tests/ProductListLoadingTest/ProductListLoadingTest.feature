@@ -11,5 +11,6 @@ Feature: User wants to ensure the product list loads correctly
   Scenario: Product items should have a valid name and price
     When User navigates to the product page
     Then Each product should have a valid name and price
+    And Each product image should load correctly
 
 
