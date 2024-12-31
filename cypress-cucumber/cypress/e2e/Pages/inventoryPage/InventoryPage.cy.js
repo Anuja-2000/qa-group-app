@@ -2,7 +2,7 @@ const baseUrl = Cypress.config("baseUrl");
 
 class Inventory {
   visitProductsPage() {
-    cy.url().should("eq", baseUrl + "inventory.html");
+      cy.url().should('eq',baseUrl+'inventory.html');
   }
 
     visitProductPageFailAttempt() {
@@ -28,21 +28,24 @@ class Inventory {
     }
 
   verifyCartEmpty() {
-    cy.get(".cart_item").should("not.exist");
+        cy.get('.cart_item').should('not.exist');
   }
 
   verifyItemsInCart(itemNames) {
+
     const items = Array.isArray(itemNames) ? itemNames : [itemNames];
 
-    cy.get(".cart_item").should("have.length", items.length);
+        cy.get('.cart_item').should('have.length', items.length);
 
     items.forEach((itemName) => {
-      cy.get(".cart_item").should("contain", itemName);
+          cy.get('.cart_item').should('contain', itemName);
     });
   }
 
+      
+  
   verifyCartItemCount(expectedCount) {
-    cy.get(".shopping_cart_badge").should("have.text", String(expectedCount));
+      cy.get('.shopping_cart_badge').should('have.text', String(expectedCount));
   }
 
   selectFilterOption(sortOption) {
