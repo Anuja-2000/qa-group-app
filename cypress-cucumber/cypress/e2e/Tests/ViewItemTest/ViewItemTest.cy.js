@@ -15,7 +15,7 @@ const addedItems = [{
   },
   {
     name: "Sauce Labs Onesie",
-    description: "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeves, and three-eighths inch seamless collar.",
+    description: "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel.",
     price: "$7.99"
   },
   {
@@ -45,4 +45,8 @@ Then("each item's details should be matched with added items", () => {
     inventory.verifyItemsInCart(["Sauce Labs Bike Light", "Sauce Labs Fleece Jacket", "Sauce Labs Onesie", "Test.allTheThings() T-Shirt (Red)"]);
     inventory.verifyCartItemCount(4);
     inventory.verifyCartItemDetails(addedItems);
+  });
+
+Then("page components should be displayed correctly", () => {
+    inventory.verifyCartPageComponents();
   });
