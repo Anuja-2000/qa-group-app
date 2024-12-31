@@ -16,3 +16,9 @@ Feature: API Testing to Insert Books Data
       | 2  | "Sample Book 2" | "Anuja" |
     Then the insert response status should be 201
     And the response should contain the book data with title "Sample Book 2" and author "Anuja"
+  Scenario: Insert book with missing mandatory fields
+    Given user sends a POST request with missing fields to add the following book:
+      | id    | title | author |
+      | 2     |       | "Anuja" |
+    Then the insert response status should be 400
+    And the response should contain an error message "Title is required"

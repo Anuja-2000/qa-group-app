@@ -1,4 +1,4 @@
-const baseUrl = Cypress.config('baseUrlAPI');
+const baseUrl = Cypress.config("baseUrlAPI");
 
 class Books {
 
