@@ -1,9 +1,7 @@
 const baseUrl = Cypress.config("baseUrlAPI");
 let authHeader = {};
 
-Given(
-  "the user is authenticated as {string} with password {string}",
-  (username, password) => {
+Given('the user is authenticated with username {string} and password {string}', (username, password) => {
     authHeader = {
       Authorization: `Basic ${btoa(username + ":" + password)}`,
       "Content-Type": "application/json",

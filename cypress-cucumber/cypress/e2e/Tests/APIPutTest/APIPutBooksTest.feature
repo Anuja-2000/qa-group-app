@@ -4,7 +4,7 @@ Feature: Update a Book
   So that I can modify its details
 
   Background:
-    And the user is authenticated as "admin" with password "password"
+    And the user is authenticated with username "admin" and password "password"
 
   Scenario: Successfully update a book
     Given a book exists with ID 1
@@ -31,14 +31,14 @@ Feature: Update a Book
     Then the response status code should be 401
 
   Scenario: Attempt to update a book with non-existent user
-    Given the user is authenticated as "dasuni" with password "password"
+    Given the user is authenticated with username "dasuni" and password "password"
     When the user sends a PUT request to "/api/books/1" with:
       | id    | title             | author          |
       | 1     | Updated Book      | Updated Author  |
     Then the response status code should be 401
 
 Scenario: Attempt to update a book with invalid authorization 
-    Given the user is authenticated as "user" with password "password"
+    Given the user is authenticated with username "user" and password "password"
     When the user sends a PUT request to "/api/books/1" with:
       | id    | title             | author          |
       | 1     | Updated Book      | Updated Author  |
