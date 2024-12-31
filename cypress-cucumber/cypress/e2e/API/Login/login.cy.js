@@ -18,6 +18,13 @@ class Login {
         failOnStatusCode: false,       
       });
     }
+
+    createAuthHeader(username, password) {
+        return {
+          Authorization: `Basic ${btoa(username + ':' + password)}`,
+          'Content-Type': 'application/json',
+        };
+      }
   }
   
   export default new Login();

@@ -1,12 +1,15 @@
 /// <reference types="cypress" />
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 import Inventory from "../../Pages/InventoryPage/InventoryPage.cy"; // Adjust path as needed
+import Login from "../../Pages/LoginPage/LoginPage.cy"; // Adjust path as needed
 
 
 const inventory = new Inventory();
 
-Given("User navigate to the Website", () => {
-  cy.visit(Cypress.config("baseUrl")); // Navigates to the base URL of the website
+Given("the user is logged into the application with username {string} and password {string}", (username,password) => {
+  Login.enterURL();
+  Login.enterUserNamePassword(username, password);
+  Login.clickSubmitButton();
 });
 
 When("User navigates to the product page", () => {
@@ -30,12 +33,11 @@ Then("Each product should have a valid name and price", () => {
 });
 
 And("Each product image should load correctly", () => {
-  cy.get(".inventory_item").each(($el) => {
+
     // Validate that each product image loads correctly
-    cy.wrap($el).find(".inventory_item_img").should("be.visible");
-    cy.wrap($el).find(".inventory_item_name").invoke('text').then((productName) => {
-      cy.wrap($el).find(".inventory_item_img").should('have.attr', 'alt', productName);
-    });
-  });
+    cy.get(".inventory_item_img img").each(($img) => {
+      cy.wrap($img).should("have.attr", "src").and("not.equal", "/static/media/sl-404.168b1cce.jpg");
+    })
+
   });
 
