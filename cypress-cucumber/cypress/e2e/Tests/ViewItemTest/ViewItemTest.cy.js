@@ -3,7 +3,7 @@ import Inventory from "../../Pages/inventoryPage/InventoryPage.cy";
 import Login from "../../Pages/LoginPage/LoginPage.cy";
 
 const inventory = new Inventory();
-addedItems = [{
+const addedItems = [{
     name: "Sauce Labs Bike Light",
     description: "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.",
     price: "$9.99"
