@@ -39,6 +39,15 @@ class Inventory {
           cy.get('.cart_item').should('contain', itemName);
         });
       }
+  verifyCartItemDetails(itemList) {
+        cy.get('.cart_item').each(($cartItem, index) => {
+          const item = itemList[index];
+          cy.wrap($cartItem).should('contain', item.name);
+          cy.wrap($cartItem).should('contain', item.description);
+          cy.wrap($cartItem).should('contain', item.price);
+          cy.wrap($cartItem).find('.cart_button').should('have.text', 'REMOVE');
+        });
+  }
       
     verifyCartItemCount(expectedCount) {
       cy.get('.shopping_cart_badge').should('have.text', String(expectedCount));
