@@ -1,4 +1,4 @@
-const baseUrl = Cypress.config('baseUrlAPI');
+const baseUrl = Cypress.config("baseUrlAPI");
 
 class Books {
 
@@ -36,17 +36,10 @@ class Books {
         return cy.request('GET', baseUrl + '/api/books');
     }
 
-    getBook(id, authHeader) {
-       return cy.request({
-            method: 'GET',
-            url: baseUrl+`/api/books/${id}`,
-        });
-    }
-    
     deleteBook(bookId) {
         cy.request('DELETE', baseUrl + '/api/books/' + bookId);
     }
-    }
+}
 
 const books = new Books();
 export default books;
