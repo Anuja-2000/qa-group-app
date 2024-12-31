@@ -1,68 +1,77 @@
 import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
 import Inventory from "../../Pages/inventoryPage/InventoryPage.cy";
-import Login from "../../Pages/LoginPage/LoginPage.cy";
+import CheckoutFormPage from "../../Pages/CheckoutFormPage/CheckoutFormPage.cy";
 
 const inventory = new Inventory();
+const checkoutPage = new CheckoutFormPage();
 
-// User login and navigation to the product page
-Given("the user is logged into the application", () => {
-  Login.enterURL();
-  Login.enterUserNamePassword("standard_user", "secret_sauce");
-  Login.clickSubmitButton();
+Given("the user is logged in", () => {
+  cy.login("standard_user", "secret_sauce");
 });
 
 Given("the user is on the products page", () => {
   inventory.visitProductsPage();
 });
 
-// Adding items to the cart
-When("the user adds the {string} to the cart", (itemName) => {
-  inventory.addItemToCart(itemName);
+Given("the user has added the {string} to the cart", (item) => {
+  inventory.addItemToCart(item);
 });
 
-When("the user views the cart", () => {
+When("the user adds the {string} and {string} to the cart", (item1, item2) => {
+  inventory.addItemToCart(item1);
+  inventory.addItemToCart(item2);
+});
+
+Then("the user views the cart", () => {
   inventory.viewCart();
 });
 
-Then("the user should see the {string} in the cart", (itemName) => {
-  inventory.verifyItemsInCart(itemName);
-});
-
-Then("the cart item count should be {int}", (expectedCount) => {
-  inventory.verifyCartItemCount(expectedCount);
-});
-
-// Adding multiple items to the cart
-Given(
-  "the user has added the {string} and {string} to the cart",
+Then(
+  "the user should see the {string} and {string} in the cart",
   (item1, item2) => {
-    inventory.addItemToCart(item1);
-    inventory.addItemToCart(item2);
-    inventory.viewCart();
     inventory.verifyItemsInCart([item1, item2]);
-    inventory.verifyCartItemCount(2);
   }
 );
 
-// Navigating to the checkout page
+Then("the cart item count should be 2", () => {
+  inventory.verifyCartItemCount(2);
+});
+
 When("the user clicks the checkout button", () => {
-  inventory.clickCheckoutButton();
+  cy.get(".shopping_cart_link").click();
+  cy.url().should("include", "cart.html");
+  checkoutPage.clickCheckoutButton();
 });
 
 Then(
-  "the user should be navigated to the Checkout: Your Information page",
+  'the user should be navigated to the "Checkout: Your Information" page',
   () => {
-    checkoutPage.verifyTitle();
+    cy.url().should("include", "checkout-step-one.html");
+    checkoutPage.verifyTitle("Checkout: Your Information");
   }
 );
 
-// Filling out the checkout form
 When("the user fills out the checkout information form with valid data", () => {
   checkoutPage.fillCheckoutForm("John", "Doe", "12345");
   checkoutPage.submitForm();
 });
 
-// Handling invalid form submissions
+Then("the user should proceed to the next step of the checkout process", () => {
+  cy.url().should("include", "checkout-step-two.html");
+});
+
+When("the user enters an invalid postal code and submits", () => {
+  checkoutPage.fillCheckoutForm("John", "Doe", "abcde");
+  checkoutPage.submitForm();
+});
+
+Then(
+  "the user should not see any error message for invalid postal code",
+  () => {
+    checkoutPage.verifyInvalidPostalCodeError();
+  }
+);
+
 When(
   "the user leaves the checkout information fields empty and submits",
   () => {
@@ -71,12 +80,6 @@ When(
   }
 );
 
-When("the user enters an invalid postal code and submits", () => {
-  checkoutPage.fillCheckoutForm("John", "Doe", "abcde");
-  checkoutPage.submitForm();
-});
-
-// Validations for form errors and navigation
 Then("the user should see an error message for empty fields", () => {
   checkoutPage.verifyFormValidationError("Error: First Name is required");
 });
@@ -85,9 +88,13 @@ Then("the user should see an error message for invalid postal code", () => {
   checkoutPage.verifyFormValidationError("Error: Postal Code is invalid");
 });
 
+When("the user clicks the cancel button", () => {
+  checkoutPage.clickCancelButton();
+});
+
 Then(
   "the user should be redirected to the previous page when they click cancel",
   () => {
-    cy.url().should("eq", `${Cypress.config("baseUrl")}inventory.html`);
+    cy.url().should("eq", `${Cypress.config("baseUrl")}cart.html`);
   }
 );

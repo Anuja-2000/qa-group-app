@@ -10,11 +10,9 @@ class Inventory {
     }
   
     addItemToCart(itemName) {
-
       cy.contains('.inventory_item', itemName)
         .find('button[data-test^="add-to-cart"]')
         .click();
-        
     }
   
     removeItemFromCart(itemName) {
@@ -39,12 +37,10 @@ class Inventory {
 
     items.forEach((itemName) => {
           cy.get('.cart_item').should('contain', itemName);
-    });
-  }
-
+        });
+      }
       
-  
-  verifyCartItemCount(expectedCount) {
+    verifyCartItemCount(expectedCount) {
       cy.get('.shopping_cart_badge').should('have.text', String(expectedCount));
   }
 
@@ -71,6 +67,10 @@ class Inventory {
         const sortedPrices = [...prices].sort((a, b) => a - b);
         expect(prices).to.deep.equal(sortedPrices);
       });
+  }
+
+  clickCheckoutButton() {
+    cy.get('button[data-test="checkout"]').click();
   }
 
   removeItemBeforeCart(itemName) {
