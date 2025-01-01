@@ -1,5 +1,5 @@
 import {Given, When, Then} from "@badeball/cypress-cucumber-preprocessor"
-import Inventory from "../../Pages/inventoryPage/InventoryPage.cy";
+import Inventory from "../../Pages/InventoryPage/InventoryPage.cy";
 import login from "../../Pages/LoginPage/LoginPage.cy";
 const inventory = new Inventory();
 

@@ -4,12 +4,10 @@ import login from "../../Pages/LoginPage/LoginPage.cy";
 Given("User navigate to the Website", () => {
 login.enterURL();
 });
-When("User entered username {string} and password {string}", (username,password) => {
+When("locked_user entered username {string} and password {string}", (username,password) => {
 login.enterLockedUserNamePassword(username,password);
 });
-When("User click on sign in button", () => {
-    login.clickSubmitButton();
-});
+
 Then("Error message {string} is displayed.", (errorMessage) => {
     login.verifyLockedUserErrorMessage(errorMessage);
 });

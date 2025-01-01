@@ -2,6 +2,7 @@ const { defineConfig } = require("cypress");
 const createBundler = require('@bahmutov/cypress-esbuild-preprocessor');
 const { addCucumberPreprocessorPlugin } = require('@badeball/cypress-cucumber-preprocessor');
 const createEsbuildPlugin  = require('@badeball/cypress-cucumber-preprocessor/esbuild').createEsbuildPlugin;
+const { allureCypress } =  require("allure-cypress/reporter");
 
 async function setupNodeEvents(on, config) {
   // This is required for the preprocessor to be able to generate JSON reports after each run
@@ -10,6 +11,8 @@ async function setupNodeEvents(on, config) {
   on('file:preprocessor', createBundler({
     plugins: [createEsbuildPlugin(config)]
   }));
+
+  allureCypress(on, config);
 
   // Make sure to return the config object as it might have been modified by the plugin
   return config;

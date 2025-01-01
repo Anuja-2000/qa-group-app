@@ -1,11 +1,11 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
-import Inventory from "../../Pages/inventoryPage/InventoryPage.cy";
+import Inventory from "../../Pages/InventoryPage/InventoryPage.cy";
 import CheckoutFormPage from "../../Pages/CheckoutFormPage/CheckoutFormPage.cy";
 
 const inventory = new Inventory();
 const checkoutPage = new CheckoutFormPage();
 
-Given("the user is logged in", () => {
+Given("the user is logged into the application", () => {
   cy.login("standard_user", "secret_sauce");
 });
 

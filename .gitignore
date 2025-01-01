@@ -5,6 +5,8 @@
 cypress-cucumber/node_modules
 cypress-cucumber/package-lock.json
 cypress-cucumber/cypress/screenshots
+cypress-cucumber/allure-results
+cypress-cucumber/allure-report
 /.pnp
 .pnp.*
 .yarn/*

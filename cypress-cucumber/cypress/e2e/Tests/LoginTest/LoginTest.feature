@@ -4,7 +4,7 @@ Feature: User want to login into the site
     Given User navigate to the Website
 
   Scenario: Login as locked out user with valid data
-    When User entered username "locked_out_user" and password "secret_sauce"
+    When locked_user entered username "locked_out_user" and password "secret_sauce"
     And User click on sign in button
     Then Error message "Epic sadface: Sorry, this user has been locked out." is displayed.
 
