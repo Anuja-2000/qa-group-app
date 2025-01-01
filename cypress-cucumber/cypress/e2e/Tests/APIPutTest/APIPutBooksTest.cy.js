@@ -59,14 +59,3 @@ Then("the response should include:", (dataTable) => {
 Then("the response body should contain {string}", (message) => {
   cy.get("@response").its("body").should("include", message);
 });
-
-Then(
-  "the response status code should be {int} due to missing parameters",
-  (statusCode) => {
-    cy.get("@response").its("status").should("eq", statusCode);
-    cy.get("@response")
-      .its("body")
-      .should("include", "Missing mandatory parameters");
-  }
-);
-
