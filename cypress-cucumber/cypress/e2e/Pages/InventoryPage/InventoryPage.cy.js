@@ -67,6 +67,7 @@ class Inventory {
         expect(prices).to.deep.equal(sortedPrices);
       });
   }
+
   clickCheckoutButton() {
     cy.get('button[data-test="checkout"]').click();
   }
