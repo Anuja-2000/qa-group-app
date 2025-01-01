@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 cypress-cucumber/node_modules
+cypress-cucumber/package-lock.json
 cypress-cucumber/cypress/screenshots
 /.pnp
 .pnp.*
