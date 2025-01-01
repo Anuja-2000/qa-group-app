@@ -1,3 +1,4 @@
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import books from "../../API/Books/books.cy";
 import login from "../../API/Login/login.cy";
 const baseUrl = Cypress.config('baseUrlAPI');

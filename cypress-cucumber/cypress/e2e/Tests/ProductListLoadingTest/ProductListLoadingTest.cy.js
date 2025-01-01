@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import Inventory from "../../Pages/InventoryPage/InventoryPage.cy"; // Adjust path as needed
 import Login from "../../Pages/LoginPage/LoginPage.cy"; // Adjust path as needed
 
@@ -32,7 +32,7 @@ Then("Each product should have a valid name and price", () => {
   });
 });
 
-And("Each product image should load correctly", () => {
+Then("Each product image should load correctly", () => {
 
     // Validate that each product image loads correctly
     cy.get(".inventory_item_img img").each(($img) => {

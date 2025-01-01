@@ -1,4 +1,4 @@
-import {Given, When, Then, And} from "cypress-cucumber-preprocessor/steps"
+import {Given, When, Then} from "@badeball/cypress-cucumber-preprocessor"
 
 Given('the user is logged in as a {string} with the password {string}', (username, password) => {
     cy.login(username, password);

@@ -1,4 +1,4 @@
-import {Given, When, Then, And} from "cypress-cucumber-preprocessor/steps"
+import {Given, When, Then} from "@badeball/cypress-cucumber-preprocessor"
 import Login from '../../API/Login/login.cy';
 
 let response;

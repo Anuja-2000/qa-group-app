@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import {Given, When, Then, And} from "cypress-cucumber-preprocessor/steps"
+import {Given, When, Then} from "@badeball/cypress-cucumber-preprocessor"
 import login from "../../Pages/LoginPage/LoginPage.cy";
 Given("User navigate to the Website", () => {
 login.enterURL();
@@ -7,7 +7,7 @@ login.enterURL();
 When("User entered username {string} and password {string}", (username,password) => {
 login.enterLockedUserNamePassword(username,password);
 });
-And("User click on sign in button", () => {
+When("User click on sign in button", () => {
     login.clickSubmitButton();
 });
 Then("Error message {string} is displayed.", (errorMessage) => {
@@ -17,7 +17,7 @@ Then("Error message {string} is displayed.", (errorMessage) => {
 When("User entered username {string} and password {string}", (username,password) => {
     login.enterUserNamePassword(username,password);
 });
-And("User click on sign in button", () => {
+When("User click on sign in button", () => {
     login.clickSubmitButton();
 });
 Then("Validate the title after login", () => {

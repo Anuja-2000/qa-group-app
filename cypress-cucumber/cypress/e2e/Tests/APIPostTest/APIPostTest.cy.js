@@ -1,4 +1,4 @@
-import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import login from "../../API/Login/login.cy";
 import Books from "../../API/Books/books.cy";
 
@@ -41,7 +41,7 @@ Then("the insert response status should be {int}", (statusCode) => {
   expect(response.status).to.eq(statusCode);
 });
 
-And(
+Then(
   "the response should contain the book data with title {string} and author {string}",
   (expectedTitle, expectedAuthor) => {
     expect(response.body).to.have.property("title", expectedTitle);
@@ -49,6 +49,6 @@ And(
   }
 );
 
-And("the response should contain an error message {string}", (errorMessage) => {
+Then("the response should contain an error message {string}", (errorMessage) => {
   expect(response.body).to.have.property("error", errorMessage);
 });

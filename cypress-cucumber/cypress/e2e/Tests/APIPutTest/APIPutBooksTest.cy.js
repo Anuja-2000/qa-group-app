@@ -1,3 +1,4 @@
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 const baseUrl = Cypress.config("baseUrlAPI");
 let authHeader = {};
 

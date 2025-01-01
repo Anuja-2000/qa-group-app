@@ -1,4 +1,4 @@
-import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import login from "../../API/Login/login.cy";
 import Books from "../../API/Books/books.cy";
 
@@ -52,14 +52,14 @@ Then("the GET response status should be {int}", (statusCode) => {
   expect(response.status).to.eq(statusCode);
 });
 
-And('the response should contain a list of books', () => {
+Then('the response should contain a list of books', () => {
     expect(response.body).to.deep.equal(books);
 });
 
-And('the response should contain a message mentioning {string}', (message) => {
+Then('the response should contain a message mentioning {string}', (message) => {
     expect(response.body).to.deep.equal(message);
 });
 
-And("the response body should indicate no books found", () => {
+Then("the response body should indicate no books found", () => {
   expect(response.body.message).to.eq(undefined);
 });
