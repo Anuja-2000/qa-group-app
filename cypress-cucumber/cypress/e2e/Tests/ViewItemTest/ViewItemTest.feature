@@ -1,7 +1,7 @@
 Feature: View cart feature
 
 Background:
-    Given the user is logged into the application
+    Given the user is logged into the application with username "problem_user" and password "secret_sauce"
     
 Scenario: Verify that each item's details are correctly displayed in the page
     Given the user add items to cart

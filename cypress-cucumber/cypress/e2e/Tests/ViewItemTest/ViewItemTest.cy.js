@@ -1,5 +1,5 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
-import Inventory from "../../Pages/inventoryPage/InventoryPage.cy";
+import Inventory from "../../Pages/InventoryPage/InventoryPage.cy";
 import Login from "../../Pages/LoginPage/LoginPage.cy";
 
 const inventory = new Inventory();
@@ -24,9 +24,9 @@ const addedItems = [{
     price: "$15.99"
   }];
 
-Given("the user is logged into the application", () => {
+Given("the user is logged into the application with username {string} and password {string}", () => {
     Login.enterURL();
-    Login.enterUserNamePassword("standard_user", "secret_sauce");
+    Login.enterUserNamePassword("problem_user", "secret_sauce");
     Login.clickSubmitButton();
   });
 
