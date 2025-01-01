@@ -1,7 +1,8 @@
 const baseUrl = Cypress.config("baseUrlAPI");
 
-class Books {
 
+class Books {
+    
     visitBooksPage() {
         cy.url().should('eq',baseUrl+'books');
     }
@@ -36,8 +37,13 @@ class Books {
         return cy.request('GET', baseUrl + '/api/books');
     }
 
-    deleteBook(bookId) {
-        cy.request('DELETE', baseUrl + '/api/books/' + bookId);
+    deleteBook(bookId, authHeader) {
+        return cy.request({
+            method:'DELETE',
+            url:baseUrl + '/api/books/' + bookId,
+            headers: authHeader,
+            failOnStatusCode: false
+     });
     }
 }
 
