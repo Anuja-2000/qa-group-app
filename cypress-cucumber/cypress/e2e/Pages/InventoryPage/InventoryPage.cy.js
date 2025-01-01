@@ -1,20 +1,18 @@
 const baseUrl = Cypress.config("baseUrl");
 
 class Inventory {
-    visitProductsPage() {
+  visitProductsPage() {
       cy.url().should('eq',baseUrl+'inventory.html');
-    }
+  }
 
     visitProductPageFailAttempt() {
             cy.visit(baseUrl+'inventory.html', { failOnStatusCode: false });
     }
   
     addItemToCart(itemName) {
-
       cy.contains('.inventory_item', itemName)
         .find('button[data-test^="add-to-cart"]')
         .click();
-        
     }
   
     removeItemFromCart(itemName) {
@@ -27,17 +25,17 @@ class Inventory {
       cy.get('.shopping_cart_link').click();
     }
 
-    verifyCartEmpty() {
+  verifyCartEmpty() {
         cy.get('.cart_item').should('not.exist');
-    }
+  }
 
-    verifyItemsInCart(itemNames) {
+  verifyItemsInCart(itemNames) {
 
-        const items = Array.isArray(itemNames) ? itemNames : [itemNames];
-      
+    const items = Array.isArray(itemNames) ? itemNames : [itemNames];
+
         cy.get('.cart_item').should('have.length', items.length);
-      
-        items.forEach((itemName) => {
+
+    items.forEach((itemName) => {
           cy.get('.cart_item').should('contain', itemName);
         });
       }
@@ -61,11 +59,9 @@ class Inventory {
   }
 
       
-      
-  
     verifyCartItemCount(expectedCount) {
       cy.get('.shopping_cart_badge').should('have.text', String(expectedCount));
-    }
+  }
 
   selectFilterOption(sortOption) {
     cy.get(".product_sort_container") // Replace '#sortDropdown' with the actual dropdown selector
@@ -90,6 +86,16 @@ class Inventory {
         const sortedPrices = [...prices].sort((a, b) => a - b);
         expect(prices).to.deep.equal(sortedPrices);
       });
+  }
+
+  clickCheckoutButton() {
+    cy.get('button[data-test="checkout"]').click();
+  }
+
+  removeItemBeforeCart(itemName) {
+    cy.contains(".inventory_item", itemName)
+      .find('button[data-test^="remove"]')
+      .click();
   }
 }
 

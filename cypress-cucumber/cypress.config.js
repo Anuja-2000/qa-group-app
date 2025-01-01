@@ -8,7 +8,7 @@ module.exports = defineConfig({
       on("file:preprocessor", cucumber());
     },
     baseUrl: "https://www.saucedemo.com/",
-    baseUrlAPI: "http://localhost:7081",
+    baseUrlAPI: "http://13.212.205.196:7081",
   },
   chromeWebSecurity: false,
 });
