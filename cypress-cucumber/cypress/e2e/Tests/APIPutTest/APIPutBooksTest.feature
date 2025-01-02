@@ -57,8 +57,8 @@ Scenario: Attempt to update a book with invalid authorization
       | id    | title             | author          |
       | 1     |                   |                 |
     Then the response status code should be 400 due to missing parameters
-    And the response body should contain "Missing mandatory parameters"
-    
+    And the response body should contain "Missing mandatory parameters" 
+
   Scenario: Attempt to update a book with invalid data types
     Given the user is authenticated as "admin" with password "password"
     When the user sends a PUT request to "/api/books/1" with:
