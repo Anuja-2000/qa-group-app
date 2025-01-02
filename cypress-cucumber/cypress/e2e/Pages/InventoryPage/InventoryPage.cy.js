@@ -88,6 +88,16 @@ class Inventory {
         expect(prices).to.deep.equal(sortedPrices);
       });
   }
+
+  clickCheckoutButton() {
+    cy.get('button[data-test="checkout"]').click();
+  }
+
+  removeItemBeforeCart(itemName) {
+    cy.contains(".inventory_item", itemName)
+      .find('button[data-test^="remove"]')
+      .click();
+  }
 }
 
 export default Inventory;
