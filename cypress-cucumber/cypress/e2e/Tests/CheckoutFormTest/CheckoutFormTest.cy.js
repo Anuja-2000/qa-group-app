@@ -1,5 +1,5 @@
 import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
-import Inventory from "../../Pages/inventoryPage/InventoryPage.cy";
+import Inventory from "../../Pages/InventoryPage/InventoryPage.cy";
 import CheckoutFormPage from "../../Pages/CheckoutFormPage/CheckoutFormPage.cy";
 
 const inventory = new Inventory();
