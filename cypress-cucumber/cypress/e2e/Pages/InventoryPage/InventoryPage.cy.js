@@ -39,6 +39,27 @@ class Inventory {
     });
   }
 
+  verifyCartItemDetails(itemList) {
+    cy.get(".cart_item").each(($cartItem, index) => {
+      const item = itemList[index];
+      cy.wrap($cartItem).should("contain", item.name);
+      cy.wrap($cartItem).should("contain", item.description);
+      cy.wrap($cartItem).should("contain", item.price);
+      cy.wrap($cartItem).find(".cart_button").should("have.text", "Remove");
+    });
+  }
+
+  verifyCartPageComponents() {
+    cy.get('[data-test="secondary-header"]').should("have.text", "Your Cart");
+    cy.get('[data-test="cart-quantity-label"]').should("have.text", "QTY");
+    cy.get('[data-test="cart-desc-label"]').should("have.text", "Description");
+    cy.get('[data-test="continue-shopping"]').should(
+      "have.text",
+      "Continue Shopping"
+    );
+    cy.get('[data-test="checkout"]').should("have.text", "Checkout");
+  }
+
   verifyCartItemCount(expectedCount) {
     cy.get(".shopping_cart_badge").should("have.text", String(expectedCount));
   }
@@ -66,10 +87,6 @@ class Inventory {
         const sortedPrices = [...prices].sort((a, b) => a - b);
         expect(prices).to.deep.equal(sortedPrices);
       });
-  }
-
-  clickCheckoutButton() {
-    cy.get('button[data-test="checkout"]').click();
   }
 }
 

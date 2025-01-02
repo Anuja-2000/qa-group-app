@@ -11,7 +11,7 @@ let books = [
   },
     {
         id: 2,
-        title: "Sample Book 2",
+        title: null,
         author: "Anuja",
     },
 ];
