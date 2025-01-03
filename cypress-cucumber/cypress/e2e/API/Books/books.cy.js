@@ -15,16 +15,7 @@ class Books {
         });
       }
 
-    addOneBook(bookData,authToken) {
-        return cy.request({
-            method: 'POST',
-            url: baseUrl+'/api/books',
-            headers:{ Authorization: `Bearer ${authToken}` },
-            body: bookData,
-            failOnStatusCode: false,
-        });
-    }
-    
+
     getBook(bookId) {
         return cy.request({
             method:'GET',
