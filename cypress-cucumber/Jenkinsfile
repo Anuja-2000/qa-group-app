@@ -11,19 +11,19 @@ pipeline {
                 checkout scm
             }
         }
-
-        stage('Install Dependencies') {
-            steps {
-                // Install project dependencies
-                sh 'cd cypress-cucumber'
-                sh 'npm install'
+        dir('cypress-cucumber') {
+            stage('Install Dependencies') {
+                steps {
+                    // Install project dependencies
+                    sh 'npm install'
+                }
             }
-        }
 
-        stage('Run Cypress Tests') {
-            steps {
-                // Run Cypress tests
-                sh 'npm run cypress:run'
+            stage('Run Cypress Tests') {
+                steps {
+                    // Run Cypress tests
+                    sh 'npm run cypress:run'
+                }
             }
         }
     }
