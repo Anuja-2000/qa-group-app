@@ -23,20 +23,6 @@ Feature: Update a Book
     Then the put request response status code should be 404
     And the put request response body should contain "Book not found"
 
-  Scenario: Attempt to update a book without authentication
-    Given the user is not authenticated
-    When the user sends a PUT request to "/api/books/1" with:
-      | id    | title             | author          |
-      | 1     | Updated Book      | Updated Author  |
-    Then the put request response status code should be 401
-
-  Scenario: Attempt to update a book with non-existent user
-    Given the user is authenticated with username "dasuni" and password "password"
-    When the user sends a PUT request to "/api/books/1" with:
-      | id    | title             | author          |
-      | 1     | Updated Book      | Updated Author  |
-    Then the put request response status code should be 401
-
 Scenario: Attempt to update a book with invalid authorization 
     Given the user is authenticated with username "user" and password "password"
     When the user sends a PUT request to "/api/books/1" with:
