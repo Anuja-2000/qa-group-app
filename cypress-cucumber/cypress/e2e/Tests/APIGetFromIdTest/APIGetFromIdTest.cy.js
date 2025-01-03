@@ -11,9 +11,12 @@ Given('the user logs in with username {string} with password {string}', (usernam
     })
 });
 
+And('enter book details with valid id',() =>{
+   Books.addBook({id:1, title: "Newton Laws", author: "Author B"});
+});
 
-Given('a valid book ID exists', () => {
-    bookId = 2;
+Given('a valid book ID exists {int}', (id) => {
+    bookId = id;
 });
 
 When('the user fetches the book details with the ID', () => {
