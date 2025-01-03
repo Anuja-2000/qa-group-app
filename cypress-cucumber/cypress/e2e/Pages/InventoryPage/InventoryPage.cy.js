@@ -1,71 +1,68 @@
 const baseUrl = Cypress.config("baseUrl");
 
 class Inventory {
-    visitProductsPage() {
-      cy.url().should('eq',baseUrl+'inventory.html');
-    }
+  visitProductsPage() {
+    cy.url().should("eq", baseUrl + "inventory.html");
+  }
 
-    visitProductPageFailAttempt() {
-            cy.visit(baseUrl+'inventory.html', { failOnStatusCode: false });
-    }
-  
-    addItemToCart(itemName) {
+  visitProductPageFailAttempt() {
+    cy.visit(baseUrl + "inventory.html", { failOnStatusCode: false });
+  }
 
-      cy.contains('.inventory_item', itemName)
-        .find('button[data-test^="add-to-cart"]')
-        .click();
-        
-    }
-  
-    removeItemFromCart(itemName) {
-      cy.contains('.cart_item', itemName)
-        .find('button[data-test^="remove"]')
-        .click();
-    }
-  
-    viewCart() {
-      cy.get('.shopping_cart_link').click();
-    }
+  addItemToCart(itemName) {
+    cy.contains(".inventory_item", itemName)
+      .find('button[data-test^="add-to-cart"]')
+      .click();
+  }
 
-    verifyCartEmpty() {
-        cy.get('.cart_item').should('not.exist');
-    }
+  removeItemFromCart(itemName) {
+    cy.contains(".cart_item", itemName)
+      .find('button[data-test^="remove"]')
+      .click();
+  }
 
-    verifyItemsInCart(itemNames) {
+  viewCart() {
+    cy.get(".shopping_cart_link").click();
+  }
 
-        const items = Array.isArray(itemNames) ? itemNames : [itemNames];
-      
-        cy.get('.cart_item').should('have.length', items.length);
-      
-        items.forEach((itemName) => {
-          cy.get('.cart_item').should('contain', itemName);
-        });
-      }
+  verifyCartEmpty() {
+    cy.get(".cart_item").should("not.exist");
+  }
+
+  verifyItemsInCart(itemNames) {
+    const items = Array.isArray(itemNames) ? itemNames : [itemNames];
+
+    cy.get(".cart_item").should("have.length", items.length);
+
+    items.forEach((itemName) => {
+      cy.get(".cart_item").should("contain", itemName);
+    });
+  }
 
   verifyCartItemDetails(itemList) {
-        cy.get('.cart_item').each(($cartItem, index) => {
-          const item = itemList[index];
-          cy.wrap($cartItem).should('contain', item.name);
-          cy.wrap($cartItem).should('contain', item.description);
-          cy.wrap($cartItem).should('contain', item.price);
-          cy.wrap($cartItem).find('.cart_button').should('have.text', 'Remove');
-        });
+    cy.get(".cart_item").each(($cartItem, index) => {
+      const item = itemList[index];
+      cy.wrap($cartItem).should("contain", item.name);
+      cy.wrap($cartItem).should("contain", item.description);
+      cy.wrap($cartItem).should("contain", item.price);
+      cy.wrap($cartItem).find(".cart_button").should("have.text", "Remove");
+    });
   }
 
   verifyCartPageComponents() {
-    cy.get('[data-test="secondary-header"]').should('have.text', 'Your Cart');
-    cy.get('[data-test="cart-quantity-label"]').should('have.text', 'QTY');
-    cy.get('[data-test="cart-desc-label"]').should('have.text', 'Description');
-    cy.get('[data-test="continue-shopping"]').should('have.text', 'Continue Shopping');
-    cy.get('[data-test="checkout"]').should('have.text', 'Checkout');
+    cy.get('[data-test="secondary-header"]').should("have.text", "Your Cart");
+    cy.get('[data-test="cart-quantity-label"]').should("have.text", "QTY");
+    cy.get('[data-test="cart-desc-label"]').should("have.text", "Description");
+    cy.get('[data-test="continue-shopping"]').should(
+      "have.text",
+      "Continue Shopping"
+    );
+    cy.get('[data-test="checkout"]').should("have.text", "Checkout");
   }
 
-      
-      
-  
-    verifyCartItemCount(expectedCount) {
-      cy.get('.shopping_cart_badge').should('have.text', String(expectedCount));
-    }
+  verifyCartItemCount(expectedCount) {
+    cy.get(".shopping_cart_badge").should("have.text", String(expectedCount));
+  }
 
   selectFilterOption(sortOption) {
     cy.get(".product_sort_container") // Replace '#sortDropdown' with the actual dropdown selector
@@ -90,6 +87,16 @@ class Inventory {
         const sortedPrices = [...prices].sort((a, b) => a - b);
         expect(prices).to.deep.equal(sortedPrices);
       });
+  }
+
+  clickCheckoutButton() {
+    cy.get('button[data-test="checkout"]').click();
+  }
+
+  removeItemBeforeCart(itemName) {
+    cy.contains(".inventory_item", itemName)
+      .find('button[data-test^="remove"]')
+      .click();
   }
 }
 

@@ -48,6 +48,3 @@ Given(
     inventory.verifyCartItemCount(2);
   }
 );
-
-
-

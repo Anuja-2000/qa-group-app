@@ -42,7 +42,7 @@ When("the user sends a PUT request to {string} with:", (path, dataTable) => {
   }).as("response");
 });
 
-Then("the response status code should be {int}", (statusCode) => {
+Then("the put request response status code should be {int}", (statusCode) => {
   cy.get("@response").its("status").should("eq", statusCode);
 });
 
@@ -57,6 +57,6 @@ Then("the response should include:", (dataTable) => {
     });
 });
 
-Then("the response body should contain {string}", (message) => {
+Then("the put request response body should contain {string}", (message) => {
   cy.get("@response").its("body").should("include", message);
 });

@@ -19,7 +19,7 @@ When("the user adds the {string} to the cart", (itemName) => {
   inventory.addItemToCart(itemName);
 });
 
-When("the user removes the {string} from the cart", (itemName) => {
+When("the user removes the {string} from the cart early", (itemName) => {
   inventory.removeItemBeforeCart(itemName);
 });
 
@@ -35,7 +35,11 @@ Then("the user should see the {string} in the cart", (itemName) => {
   inventory.verifyItemsInCart(itemName);
 });
 
-Then("the cart item count should be {int}", (expectedCount) => {
+Then("the user should not see the {string} in the cart", (itemName) => {
+  inventory.verifyCartEmpty();
+});
+
+And("the cart item count should be {string}", (expectedCount) => {
   inventory.verifyCartItemCount(expectedCount);
 });
 
