@@ -13,5 +13,5 @@ Feature: GET one book and GET books
 
   Scenario: GET request when no books are available
     Given user send a GET request to get books when no books are available
-    Then the response status should be 404
+    Then the GET response status should be 404
     And the response body should indicate no books found
