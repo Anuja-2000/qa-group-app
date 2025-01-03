@@ -13,8 +13,9 @@ pipeline {
         }
        
             stage('Install Dependencies') {
-                 dir('cypress-cucumber') {
+                 
                 steps {
+                    dir('cypress-cucumber') {
                     // Install project dependencies
                     sh 'npm install'
                 }
@@ -22,8 +23,9 @@ pipeline {
             }
 
             stage('Run Cypress Tests') {
-                 dir('cypress-cucumber') {
+                 
                 steps {
+                    dir('cypress-cucumber') {
                     // Run Cypress tests
                     sh 'npm run cypress:run'
                 }
