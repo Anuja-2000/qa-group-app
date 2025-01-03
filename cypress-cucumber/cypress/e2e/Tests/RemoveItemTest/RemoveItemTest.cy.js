@@ -43,13 +43,4 @@ And("the cart item count should be {string}", (expectedCount) => {
   inventory.verifyCartItemCount(expectedCount);
 });
 
-// Given(
-//   "the user has added the {string} and {string} to the cart",
-//   (item1, item2) => {
-//     inventory.addItemToCart(item1);
-//     inventory.addItemToCart(item2);
-//     inventory.viewCart();
-//     inventory.verifyItemsInCart([item1, item2]);
-//     inventory.verifyCartItemCount(2);
-//   }
-// );
+
