@@ -33,16 +33,4 @@ pipeline {
             }
         
     }
-
-    post {
-        always {
-            // Archive test results and screenshots
-            archiveArtifacts artifacts: 'cypress/screenshots/**/*, cypress/videos/**/*', allowEmptyArchive: true
-            junit 'cypress/results/*.xml' // If you generate test result reports
-        }
-        failure {
-            // Notify on failure
-            echo 'Cypress tests failed!'
-        }
-    }
 }
