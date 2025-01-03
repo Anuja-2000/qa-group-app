@@ -4,8 +4,8 @@ import login from "../../API/Login/login.cy";
 
 let response;
 
-Given('the user is authenticated as {string} with password {string}',() => {
-    login.loginUser('admin','password').then((res) => {
+Given('the user log into system',() => {
+    login.loginUser('user','password').then((res) => {
         response = res;
     });
 
