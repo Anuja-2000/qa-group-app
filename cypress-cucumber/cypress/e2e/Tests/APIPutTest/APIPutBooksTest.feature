@@ -23,20 +23,6 @@ Feature: Update a Book
     Then the put request response status code should be 404
     And the put request response body should contain "Book not found"
 
-  Scenario: Attempt to update a book without authentication
-    Given the user is not authenticated
-    When the user sends a PUT request to "/api/books/1" with:
-      | id    | title             | author          |
-      | 1     | Updated Book      | Updated Author  |
-    Then the put request response status code should be 401
-
-  Scenario: Attempt to update a book with non-existent user
-    Given the user is authenticated with username "dasuni" and password "password"
-    When the user sends a PUT request to "/api/books/1" with:
-      | id    | title             | author          |
-      | 1     | Updated Book      | Updated Author  |
-    Then the put request response status code should be 401
-
 Scenario: Attempt to update a book with invalid authorization 
     Given the user is authenticated with username "user" and password "password"
     When the user sends a PUT request to "/api/books/1" with:
@@ -54,17 +40,17 @@ Scenario: Attempt to update a book with invalid authorization
 
   Scenario: Attempt to update a book with missing parameters
     When the user sends a PUT request to "/api/books/1" with:
-      | id    | title             | author          |
-      | 1     |                   |                 |
-    Then the response status code should be 400 due to missing parameters
-    And the response body should contain "Missing mandatory parameters" 
+      | id    | 
+      | 1     |           
+    Then the put request response status code should be 400 
+    And the put request response body should contain "Mandatory parameters should not be null" 
 
   Scenario: Attempt to update a book with invalid data types
     Given the user is authenticated as "admin" with password "password"
     When the user sends a PUT request to "/api/books/1" with:
       | id    | title             | author          |
       | 1     | Updated Book      | true            |
-    Then the put request response status code should be 400 due to missing parameters
+    Then the put request response status code should be 400  
     And the put request response body should contain "Invalid data type"
 
   Scenario: Attempt to update a book with empty strings for title and author

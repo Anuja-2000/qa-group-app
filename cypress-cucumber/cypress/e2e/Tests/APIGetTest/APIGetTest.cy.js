@@ -9,23 +9,23 @@ let books = [
     title: "Sample Book",
     author: "Anuja",
   },
-    {
-        id: 2,
-        title: null,
-        author: "Anuja",
-    },
+  {
+    id: 2,
+    title: null,
+    author: "Anuja",
+  },
 ];
 let id = 0;
-Given('the id is {int}',(id) => {
-id = id;
-})
+Given("the id is {int}", (id) => {
+  id = id;
+});
 
-When('user send a GET request to get one book',() => {
-  login.loginUser('admin','password');
+When("user send a GET request to get one book", () => {
+  login.loginUser("admin", "password");
   Books.getBook(id).then((res) => {
     response = res;
   });
-})
+});
 
 Given("user send a GET request to get all books", () => {
   login.loginUser("user", "password");
@@ -39,11 +39,7 @@ Given(
   () => {
     login.loginUser("user", "password");
     Books.getBooks().then((res) => {
-      // if (response.body[0] == undefined) {
-      //   response.status = 404;
-      // }
       response = res;
-      response.status = 404;
     });
   }
 );
@@ -52,12 +48,12 @@ Then("the GET response status should be {int}", (statusCode) => {
   expect(response.status).to.eq(statusCode);
 });
 
-Then('the response should contain a list of books', () => {
-    expect(response.body).to.deep.equal(books);
+Then("the response should contain a list of books", () => {
+  expect(response.body).to.deep.equal(books);
 });
 
-Then('the response should contain a message mentioning {string}', (message) => {
-    expect(response.body).to.deep.equal(message);
+Then("the response should contain a message mentioning {string}", (message) => {
+  expect(response.body).to.deep.equal(message);
 });
 
 Then("the response body should indicate no books found", () => {

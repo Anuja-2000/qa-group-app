@@ -1,7 +1,7 @@
 Feature: Handle duplicate books via POST API
 
   Background:
-    Given the user is authenticated as 'user' with password 'password'
+    Given the user log into system
 
   Scenario: Adding a duplicate book
     Given the user sends a POST request to add the book

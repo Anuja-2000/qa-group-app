@@ -11,9 +11,12 @@ Given('the user logs in with username {string} with password {string}', (usernam
     })
 });
 
+And('enter book details with valid id',() =>{
+   Books.addBook({id:1, title: "Newton Laws", author: "Author B"});
+});
 
-Given('a valid book ID exists', () => {
-    bookId = 1; // Replace with a valid book ID in your system
+Given('a valid book ID exists {int}', (id) => {
+    bookId = id;
 });
 
 When('the user fetches the book details with the ID', () => {
@@ -23,11 +26,11 @@ When('the user fetches the book details with the ID', () => {
 });
 
 Then('the API should return a 200 status code', () => {
-    expect(response.status).to.equal(200); // Validate the status code
+    expect(response.status).to.equal(200);
 });
 
 Then('the response should contain the correct book details', () => {
     expect(response.body).to.have.property('id', bookId); // Check the book ID matches
-    expect(response.body).to.have.property('title').and.to.be.a('string'); // Check the title exists and is a string
-    expect(response.body).to.have.property('author').and.to.be.a('string'); // Check the author exists and is a string
+    expect(response.body).to.have.property('title').and.to.be.a('string');
+    expect(response.body).to.have.property('author').and.to.be.a('string');
 });
