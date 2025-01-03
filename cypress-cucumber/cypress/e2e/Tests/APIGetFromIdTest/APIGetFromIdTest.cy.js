@@ -5,15 +5,18 @@ import Books from "../../API/Books/books.cy";
 let bookId;
 let response;
 
-Given('the user login with username {string} with password {string}', (username, password) => {
+Given('the user logs in with username {string} with password {string}', (username, password) => {
     login.loginUser(username, password).then((res) => {
         response= res;
     })
 });
 
+And('enter book details with valid id',() =>{
+   Books.addBook({id:1, title: "Newton Laws", author: "Author B"});
+});
 
-Given('a valid book ID exists', () => {
-    bookId = 2;
+Given('a valid book ID exists {int}', (id) => {
+    bookId = id;
 });
 
 When('the user fetches the book details with the ID', () => {
