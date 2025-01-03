@@ -5,7 +5,7 @@ import Books from "../../API/Books/books.cy";
 let bookId;
 let response;
 
-Given('the user login with username {string} with password {string}', (username, password) => {
+Given('the user logs in with username {string} with password {string}', (username, password) => {
     login.loginUser(username, password).then((res) => {
         response= res;
     })
