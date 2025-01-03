@@ -64,7 +64,7 @@ Scenario: Attempt to update a book with invalid authorization
     When the user sends a PUT request to "/api/books/1" with:
       | id    | title             | author          |
       | 1     | Updated Book      | true            |
-    Then the put request response status code should be 400 due to missing parameters
+    Then the put request response status code should be 400  
     And the put request response body should contain "Invalid data type"
 
   Scenario: Attempt to update a book with empty strings for title and author
