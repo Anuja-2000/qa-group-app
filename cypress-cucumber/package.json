@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "cypress open",
-    "test:ci:record": "run-p --race start e2e:record"
+    "test:ci:record": "run-p --race start e2e:record",
+    "get:report": "allure generate allure-results --clean && allure open"
   },
   "author": "",
   "license": "ISC",
